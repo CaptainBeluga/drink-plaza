@@ -1,5 +1,7 @@
 [+] Add `list.html` Page
 
+[+] Add Google Fonts
+
 [+] Code Revision + Improvement
 
 [+] Test Mode
