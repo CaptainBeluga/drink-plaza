@@ -1,0 +1,38 @@
+.dropdown-menu img{
+    max-width: 15px;
+    margin-left: 5px;
+}
+
+.dropdown-menu button{
+    width: 100%;
+}
+
+.palms img{
+    max-width: 10%;
+}
+
+.card-body button{
+    width: 75%;
+}
+
+.card-body img{
+    border-radius: 10px;
+}
+
+.flex{
+    display: flex;
+}
+
+.ingredients{
+    max-width: 75%;
+}
+
+.card-prop{
+    width: 15rem;
+}
+
+
+/*logo*/
+.navbar-brand img{
+    max-width: 150px;
+}
