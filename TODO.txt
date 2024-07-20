@@ -1,6 +1,6 @@
 [+] Add `list.html` Page
 
-[+] Add Google Fonts
+[+] Edit Graffiti Font
 
 [+] Code Revision + Improvement
 

@@ -1,14 +1,39 @@
+/*TEST FONT*/
+@font-face {
+    font-family: 'PhillySans';
+    src: url('./fonts/PhillySans.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.navbar h1, input, .form-select{
+    font-family: "PhillySans";
+}
+
+/**/
+
+
+
 .dropdown-menu img{
     max-width: 15px;
     margin-left: 5px;
+    border-radius: 10%;
 }
 
 .dropdown-menu button{
     width: 100%;
 }
 
-.palms img{
-    max-width: 10%;
+
+.dropdown-menu a{
+    text-decoration: none;
+
+    background: linear-gradient(90deg, hsla(55, 100%, 50%, 1) 0%, hsla(287, 100%, 50%, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    font-weight: bold;
 }
 
 .card-body button{

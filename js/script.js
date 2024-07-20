@@ -45,8 +45,6 @@ function language(value){
         localStorage.setItem("lang",value)
 
         for(let i=0;i<btns.length;i++){
-            //classList function could be better but not that much
-
             if(btns[i].value == value){
                 btns[i].classList.add("disabled")
             }
@@ -55,13 +53,13 @@ function language(value){
             }
         }
     
-        document.getElementsByClassName("nav-link dropdown-toggle")[0].children[0].src = `../img/langs/${value.toLowerCase()}.png`
+        document.getElementsByClassName("nav-link dropdown-toggle")[0].children[0].src = `./img/langs/${value.toLowerCase()}.png`
     }
 }
 
 ///////////////////////////////////////////////
 
-let ENDPOINT = "https://www.thecocktaildb.com/api/json/v1/1/"
+const ENDPOINT = "https://www.thecocktaildb.com/api/json/v1/1/"
 
 /*
     0 => php file
@@ -164,9 +162,11 @@ async function showMore(e){
 
     if(important[1] == "drinks"){
         if(ins != null){
-            ins = ins.split(". ")
+            ins = ins.split(".")
             for(let i=0;i<ins.length;i++){
-                insP.innerHTML += `<span class="fw-bold">${i+1}. </span> ${ins[i]}${i != ins.length-1 ? "." : ""}<br><br>`
+                if(ins[i] != ""){
+                    insP.innerHTML += `<span class="fw-bold">${i+1}. </span> ${ins[i]}${i != ins.length-1 ? "." : ""}<br><br>`
+                }
             }
         }
         else{
