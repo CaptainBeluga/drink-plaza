@@ -1,29 +1,16 @@
 let mainDiv = document.querySelector("#main")
 let errLabel = document.querySelector("#errLabel")
 
-function title(s){
-    let final=""
-    let f = []
-
-    f = s.split(" ")
-    for(let i=0;i<f.length;i++){
-        final+= f[i][0].toUpperCase() + f[i].substr(1) + " "
-    }
-
-    return final
-}
-
 
 function getAsset(name){
     return `https://www.thecocktaildb.com/images/ingredients/${name.replaceAll(" ","%20")}-Medium.png`
 }
 
-btns = document.querySelector(".dropdown-menu").querySelectorAll("button")
+btns = document.querySelectorAll(".dropdown-menu")[1].querySelectorAll("button")
 
 for(let i=0;i<btns.length;i++){
     btns[i].addEventListener("click",e=>{
         e = e.srcElement.nodeName == "BUTTON" ? e.srcElement : e.srcElement.parentElement //in case the EventListener grabs the click from the image
-
         language(e.value)
     })
 }
@@ -53,7 +40,7 @@ function language(value){
             }
         }
     
-        document.getElementsByClassName("nav-link dropdown-toggle")[0].children[0].src = `./img/langs/${value.toLowerCase()}.png`
+        document.getElementsByClassName("nav-link dropdown-toggle")[1].children[0].src = `./img/langs/${value.toLowerCase()}.png`
     }
 }
 
@@ -315,17 +302,7 @@ async function showMore(e){
         try{
             let container = document.getElementById(important[0])
 
-            let anim = true
-
-            let animationInterval = setInterval(()=>{
-                container.querySelector("h3").className = anim ? "text-dark" : "text-light" 
-                
-                anim = !anim
-            
-            },150)
-
-            setTimeout(()=>
-            clearInterval(animationInterval),1500)
+            animation(container.querySelector("h3"), 250, 150, 1500)
 
             container.scrollIntoView()
 

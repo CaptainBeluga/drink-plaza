@@ -1,17 +1,15 @@
-/*TEST FONT*/
+/* TITLES */
 @font-face {
-    font-family: 'PhillySans';
-    src: url('./fonts/PhillySans.otf') format('opentype');
+    font-family: 'Easter';
+    src: url('./fonts/Easter.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
-.navbar h1, input, .form-select{
-    font-family: "PhillySans";
+
+.navbar h1, input, h3{
+    font-family: "Easter";
 }
-
-/**/
-
 
 
 .dropdown-menu img{
@@ -34,6 +32,11 @@
     color: transparent;
 
     font-weight: bold;
+}
+
+.dropdown-toggle img{
+    max-width: 20px;
+    border-radius: 10%;
 }
 
 .card-body button{
