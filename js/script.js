@@ -10,8 +10,8 @@ let langs = document.querySelectorAll(".dropdown-menu")[1]
 let btns = langs.querySelectorAll("button")
 
 langs.addEventListener("click", e => {
-    e = e.target.nodeName == "BUTTON" ? e.target : e.target.parentElement //in case the EventListener grabs the click from the image
-    language(e.value)
+    //in case the EventListener grabs the click from the image
+    language((e.target.nodeName == "BUTTON" ? e.target : e.target.parentElement).value)
 })
 
 //LANGUAGES STUFF
