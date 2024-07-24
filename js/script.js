@@ -6,14 +6,13 @@ function getAsset(name){
     return `https://www.thecocktaildb.com/images/ingredients/${name.replaceAll(" ","%20")}-Medium.png`
 }
 
-btns = document.querySelectorAll(".dropdown-menu")[1].querySelectorAll("button")
+let langs = document.querySelectorAll(".dropdown-menu")[1]
+let btns = langs.querySelectorAll("button")
 
-for(let i=0;i<btns.length;i++){
-    btns[i].addEventListener("click",e=>{
-        e = e.srcElement.nodeName == "BUTTON" ? e.srcElement : e.srcElement.parentElement //in case the EventListener grabs the click from the image
-        language(e.value)
-    })
-}
+langs.addEventListener("click", e => {
+    e = e.target.nodeName == "BUTTON" ? e.target : e.target.parentElement //in case the EventListener grabs the click from the image
+    language(e.value)
+})
 
 //LANGUAGES STUFF
 try{
@@ -22,7 +21,6 @@ try{
     localStorage.setItem("lang","IT") //default IT
     language(localStorage.getItem("lang"))
 }
-
 
 
 function language(value){
@@ -99,7 +97,7 @@ async function showMore(e){
 
     //Data Fetching
     let lang = localStorage.getItem("lang")
-    let important = e.srcElement.getAttribute("itemID").split("-")
+    let important = e.target.getAttribute("itemID").split("-")
 
     let req = await fetch(`${ENDPOINT}lookup.php?${important[2]}=${important[0]}`)   
     let json = await req.json()
@@ -107,10 +105,10 @@ async function showMore(e){
 
 
     //DOM
-    let row = e.srcElement.parentElement.children[0]
+    let row = e.target.parentElement.children[0]
     row.children[0].className = "col-md-4 mt-4 flex"
 
-    e.srcElement.style.display = "none"
+    e.target.style.display = "none"
 
 
     //PROPS CARD
@@ -285,17 +283,17 @@ async function showMore(e){
     
 
     //original "SHOW MORE" button POSITION            
-    e.srcElement.parentElement.appendChild(button)
+    e.target.parentElement.appendChild(button)
 
     button.addEventListener("click",btn => {
-        btn.srcElement.remove()
+        btn.target.remove()
         row.children[0].className = "col mt-2"
 
         for(let i=0;i<(row.children.length-1)+i;i++){   
             row.children[1].remove()         
         }
 
-        e.srcElement.style.display = "inline"
+        e.target.style.display = "inline"
 
         //Mini Animation
         
