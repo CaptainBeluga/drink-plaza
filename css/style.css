@@ -64,3 +64,19 @@
 .navbar-brand img{
     max-width: 150px;
 }
+
+.img-fluid{
+    border-radius: 100%;
+}
+
+
+.title{
+    animation-name: changeOpacity;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes changeOpacity {
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
