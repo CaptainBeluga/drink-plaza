@@ -14,12 +14,10 @@ langs.addEventListener("click", e => {
     language((e.target.nodeName == "BUTTON" ? e.target : e.target.parentElement).value)
 })
 
+
 //LANGUAGES STUFF
-try{
-    language(localStorage.getItem("lang"))
-}catch(e){
-    localStorage.setItem("lang","IT") //default IT
-    language(localStorage.getItem("lang"))
+if(localStorage.getItem("lang") == null){
+    language("IT") //default IT
 }
 
 
