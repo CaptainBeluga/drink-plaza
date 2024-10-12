@@ -94,13 +94,12 @@ async function showMore(e){
     }
 
     //Data Fetching
-    let lang = localStorage.getItem("lang")
+    let lang = localStorage.getItem("lang") != null ? localStorage.getItem("lang") : "IT";
     let important = e.target.getAttribute("itemID").split("-")
 
     let req = await fetch(`${ENDPOINT}lookup.php?${important[2]}=${important[0]}`)   
     let json = await req.json()
     json = json[important[1]][0]
-
 
     //DOM
     let row = e.target.parentElement.children[0]
@@ -362,11 +361,13 @@ async function loadData(){
         let type = opts.selectedOptions[0].value
         errLabel.textContent = ""
 
-        let req = await fetch(`${ENDPOINT+searchType[type][0]}${document.querySelector("#search").value}`)
+        let req = await fetch(`${ENDPOINT+searchType[type][0]}${document.querySelector("#search").value.replace(/\s+/g, ' ').trim()}`)
         let json = await req.json()
-
-        
         json = json[searchType[type][1]]
+
+        if(json == "no data found"){
+            throw json;
+        }
         
         for(let i=0;i<json.length;i++){
             let card = document.createElement("div")
