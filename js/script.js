@@ -6,25 +6,11 @@ function getAsset(name){
     return `https://www.thecocktaildb.com/images/ingredients/${name.replaceAll(" ","%20")}-Medium.png`
 }
 
-let langs = document.querySelectorAll(".dropdown-menu")[1]
-let btns = langs.querySelectorAll("button")
-
-langs.addEventListener("click", e => {
-    //in case the EventListener grabs the click from the image
-    language((e.target.nodeName == "BUTTON" ? e.target : e.target.parentElement).value)
-})
-
-
-//LANGUAGES STUFF
-if(localStorage.getItem("lang") == null){
-    language("IT") //default IT
-}
 
 
 function language(value){
-    const availableLanguages = ["IT","EN","ES","DE","FR"]
 
-    if(availableLanguages.includes(value)){
+    if(arrFlags.includes(value)){
         localStorage.setItem("lang",value)
 
         for(let i=0;i<btns.length;i++){
@@ -40,6 +26,42 @@ function language(value){
     }
 }
 
+
+const availableLanguages = {
+    "IT" : "Italiano",
+    "EN" : "English",
+    "ES" : "Español",
+    "DE" : "Deutsche",
+    "FR" : "Français"
+
+}
+const arrFlags = Object.keys(availableLanguages)
+
+
+let langs = document.querySelectorAll(".dropdown-menu")[1]
+arrFlags.forEach(flag => {
+    console.log()
+    langs.innerHTML+= `
+                    <button class="btn btn-dark ${arrFlags.indexOf(flag) == 0 ? "disabled" : ""}" value="${flag}">
+                        ${availableLanguages[flag]}
+                        <img src="./img/langs/${flag.toLowerCase()}.png">
+                    </button>`
+})
+
+
+let btns = langs.querySelectorAll("button")
+
+langs.addEventListener("click", e => {
+    //in case the EventListener grabs the click from the image
+    language((e.target.nodeName == "BUTTON" ? e.target : e.target.parentElement).value)
+})
+
+
+//LANGUAGES STUFF
+let tempLang = localStorage.getItem("lang")
+language(tempLang == null ? "IT" : tempLang)
+
+
 ///////////////////////////////////////////////
 
 const ENDPOINT = "https://www.thecocktaildb.com/api/json/v1/1/"
@@ -54,21 +76,29 @@ const ENDPOINT = "https://www.thecocktaildb.com/api/json/v1/1/"
 */
 
 
-searchType = {
-    "s" : ["search.php?s=", "drinks", "i"], //drink lookup
+const searchType = {
+    "s" : ["search.php?s=", "drinks", "i", "Drinks"], //drink lookup
     
-    "i" : ["search.php?i=","ingredients","iid"], //ingredient lookup
+    "i" : ["search.php?i=","ingredients","iid", "Ingredients"], //ingredient lookup
 
-    "filter-i" : ["filter.php?i=","drinks", "i"], //drinks with a specific ingredient inside
+    "filter-i" : ["filter.php?i=","drinks", "i", "Filter by Ingredient"], //drinks with a specific ingredient inside
 
-    "random" : ["random.php?", "drinks", "i"], //random drink in the db
+    "random" : ["random.php?", "drinks", "i", "Random"], //random drink in the db
 
-    "a" : ["filter.php?a=", "drinks","i"], // alcoholic / non alcoholic / optional alcohol
+    "a" : ["filter.php?a=", "drinks","i", "Type (alcoholic / non alcoholic / optional alcohol)"], // alcoholic / non alcoholic / optional alcohol
 
-    "c" : ["filter.php?c=", "drinks", "i"], // by category | (Cocktail , Ordinary_Drink , Shot , ecc...)
+    "c" : ["filter.php?c=", "drinks", "i", "Category"], // by category | (Cocktail , Ordinary_Drink , Shot , ecc...)
 
-    "g" : ["filter.php?g=","drinks","i"] // by glass (how the drink should be served) | (Champagne Flute, Shot Glass, Cocktail Glass)
+    "g" : ["filter.php?g=","drinks","i", "Glass"] // by glass (how the drink should be served) | (Champagne Flute, Shot Glass, Cocktail Glass)
 }
+
+const opts = document.querySelector("#searchType")
+const optionsKeySet = Object.keys(searchType)
+
+optionsKeySet.forEach(k => {
+    opts.innerHTML+= `<option value="${k}" ${optionsKeySet.indexOf(k) == 0 ? "selected" : ""}>${searchType[k][3]}</option>`
+})
+
 
 
 async function showMore(e){
@@ -357,7 +387,6 @@ async function loadData(){
     // FETCHING + LOADING DATA
     
     try{
-        let opts = document.querySelector("#searchType")
         let type = opts.selectedOptions[0].value
         errLabel.textContent = ""
 

@@ -1,14 +1,6 @@
 const mainDiv = document.querySelector("#mainDiv")
 
 
-let lists = {
-    "categories" : "strCategory",
-    "glasses" : "strGlass",
-    "ingredients" : "strIngredient1",
-    "alcohol" : "strAlcoholic"
-}
-
-
 for(let l in lists){
     (async()=>{
         let req = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/list.php?${l.substring(0,1)}=list`)

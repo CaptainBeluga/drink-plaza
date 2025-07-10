@@ -30,3 +30,25 @@ function animation(element, delay, frequency, duration){
         clearInterval(animationInterval),duration)
     },delay)
 }
+
+
+let lists = {
+    "categories" : "strCategory",
+    "glasses" : "strGlass",
+    "ingredients" : "strIngredient1",
+    "alcohol" : "strAlcoholic"
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const listPage = "list"
+    const dropDownMenu = document.querySelector(".dropdown-menu")
+
+    if(dropDownMenu != null){
+        dropDownMenu.innerHTML= `<a href="./${listPage}">List</a><br>`
+
+        Object.keys(lists).forEach(k => {
+            dropDownMenu.innerHTML+= `<a href="./${listPage}#${k}">${title(k)}</a><br>`
+        })
+    }
+})
